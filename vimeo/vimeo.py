@@ -37,7 +37,7 @@ class VimeoBlock(XBlock):
         help="URL of the video page at the provider", default=None, scope=Scope.content
     )
     width = Integer(help="Width of the video", default=800, scope=Scope.content)
-    height = Integer(help="Height of the video", default=800, scope=Scope.content)
+    height = Integer(help="Height of the video", default=600, scope=Scope.content)
     watched = Integer(
         help="How many times the student has watched it?",
         default=0,
@@ -70,12 +70,11 @@ class VimeoBlock(XBlock):
         css_str = self.resource_string("static/css/vimeo.css")
         frag.add_css(str(css_str))
 
-        if provider == "vimeo.com":
-            js_str = self.resource_string("static/js/lib/froogaloop.min.js")
-            frag.add_javascript(str(js_str))
-            js_str = self.resource_string("static/js/src/vimeo.js")
-            frag.add_javascript(str(js_str))
-            frag.initialize_js("VimeoBlock")
+        js_str = self.resource_string("static/js/src/froogaloop.min.js")
+        frag.add_javascript(str(js_str))
+        js_str = self.resource_string("static/js/src/vimeo.js")
+        frag.add_javascript(str(js_str))
+        frag.initialize_js("VimeoBlock")
 
         return frag
 
